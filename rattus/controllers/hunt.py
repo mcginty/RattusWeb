@@ -14,3 +14,5 @@ class HuntController(BaseController):
         #return render('/hunt.mako')
         # or, return a string
         return 'Hello World'
+
+    def 

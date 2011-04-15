@@ -5,16 +5,14 @@ from pylons import request, response, session, tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
 
 from rattus.model.meta import Session
-from rattus.model.target import Target
+from rattus.model.qr import QR
+from rattus.model.hunt_codes import HuntCodes
 from rattus.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
 
 class TargetsController(BaseController):
     """REST Controller styled on the Atom Publishing Protocol"""
-    # To properly map this controller, ensure your config/routing.py
-    # file has a resource setup:
-    #     map.resource('target', 'targets')
 
     def index(self, format='html'):
         """GET /targets: All items in the collection"""
