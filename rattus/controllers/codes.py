@@ -19,11 +19,11 @@ class CodesController(BaseController):
         """GET /targets: All items in the collection"""
         # url('targets')
         d = []
-        for target in Session.query(HuntQR).all():
+        for qr in Session.query(HuntQR).all():
             d.append( {
-                    'id': target.id,
-                    'name': target.name,
-                    'color': target.color,
+                    'qr_id': qr.qr_id,
+                    'hunt_id': qr.hunt_id,
+                    'name': qr.name,
                     } )
         return dumps(d)
 
@@ -35,7 +35,16 @@ class CodesController(BaseController):
         Session.add(newqr)
         Session.flush()
         Session.refresh(newqr)
-        huntqr = HuntQR(int(request.params['hunt']), newqr.id, request.params['name'], request.params['color'], request.params['description'], request.params['secret'], request.params['location'], int(request.params['order']))
+        order = len(Session.query(HuntQR).filter_by(hunt_id=int(request.params['hunt'])).all())
+        huntqr = HuntQR(
+                int(request.params['hunt']), 
+                newqr.id, 
+                request.params['name'], 
+                request.params['color'], 
+                request.params['description'], 
+                request.params['secret'], 
+                request.params['location'], 
+                order)
         Session.add(huntqr)
         Session.commit()
         response.headers['Content-type'] = 'image/png'
@@ -86,6 +95,10 @@ class CodesController(BaseController):
                 'valid': True,
                 'name': huntqr[0].name,
                 'color': huntqr[0].color,
+                'description': huntqr[0].description,
+                'secret': huntqr[0].secret,
+                'location': huntqr[0].location,
+                'order': huntqr[0].order,
                 'qr': 'http://chart.apis.google.com/chart?chs=480x480&cht=qr&chld=|0&chl=http%3A%2F%2Fqrios.me%2F%3A%3A'+str(huntqr[0].id),
                 }
         return dumps(d)
