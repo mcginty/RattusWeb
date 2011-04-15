@@ -12,6 +12,7 @@ def make_map(config):
     map = Mapper(directory=config['pylons.paths']['controllers'],
                  always_scan=config['debug'])
     map.resource('target', 'targets')
+    map.resource('hunt', 'hunts')
     map.minimization = False
     map.explicit = False
     
