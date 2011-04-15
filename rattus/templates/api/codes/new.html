@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>New Hunt</title>
+	</head>
+	<body>
+		<form id="new_hunt" name="new_hunt" action="/codes/create" method="post">
+			<fieldset>
+				<legend>New QR</legend>
+				<label for="hunt">Hunt</label>
+				<select name="hunt">
+					% for hunt in c.hunts:
+					<option value="${hunt[0]}">${hunt[1]}</option>
+					% endfor
+				</select><br />
+				<label for="name">Name</label><input type="text" name="name" /><br />
+				<label for="description">Description</label><input type="text" name="description" /><br />
+				<label for="color">Color</label><input type="text" name="color" /><br />
+				<label for="secret">Secret</label><input type="text" name="secret" /><br />
+				<label for="location">Location</label><input type="text" name="location" /><br />
+				<label for="order">Order</label><input type="text" name="order" /><br />
+				<input type="submit" />
+			</fieldset>
+		</form>
+	</body>
+</html>

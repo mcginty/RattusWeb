@@ -43,6 +43,13 @@ class HuntsController(BaseController):
         # url('new_hunt')
         return render('/api/hunts/new.html')
 
+    def new_code(self, format='html'):
+        hunts = Session.query(Hunt).all()
+        c['hunts'] = []
+        for hunt in hunts:
+            c['hunts'].append( (hunt.id, hunt.name) )
+        return render('/api/hunts/new.html')
+
     def update(self, id):
         """PUT /hunts/id: Update an existing item"""
         # Forms posted to this method should contain a hidden field:
