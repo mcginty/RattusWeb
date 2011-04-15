@@ -3,8 +3,8 @@ from sqlalchemy.types import String, Integer, Text
 
 from rattus.model.meta import Base
 
-class HuntCodes(Base):
-    __tablename__ = "hunt_codes"
+class HuntQR(Base):
+    __tablename__ = "hunt_qr"
 
     id = Column(Integer, primary_key=True)
     hunt_id = Column(Integer, ForeignKey('hunt.id'))
@@ -27,4 +27,4 @@ class HuntCodes(Base):
         self.order = order
 
     def __repr__(self):
-        return "<HuntCode('%s: %d, %d')" % (self.name, self.hunt_id, self.qr_id)
+        return "<HuntQR('%s: %d, %d')" % (self.name, self.hunt_id, self.qr_id)
