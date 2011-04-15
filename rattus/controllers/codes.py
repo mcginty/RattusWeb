@@ -1,5 +1,5 @@
 import logging
-from simplejson import dumps
+from json import dumps
 import urllib2
 from pylons import request, response, session, tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
@@ -75,8 +75,8 @@ class CodesController(BaseController):
         """GET /targets/id: Show a specific item"""
         # url('target', id=ID)
         d = {}
-        target = Session.query(Target).filter(Target.id==id).all()
-        if len(target) == 0:
+        huntqr = Session.query(HuntQR).filter(HuntQR.id==id).all()
+        if len(huntqr) == 0:
             d = {
                     'valid': False
                 }
@@ -84,9 +84,9 @@ class CodesController(BaseController):
 
         d = {
                 'valid': True,
-                'name': target[0].name,
-                'color': target[0].color,
-                'qr': 'http://chart.apis.google.com/chart?chs=480x480&cht=qr&chld=|0&chl='+str(target[0].id),
+                'name': huntqr[0].name,
+                'color': huntqr[0].color,
+                'qr': 'http://chart.apis.google.com/chart?chs=480x480&cht=qr&chld=|0&chl=http%3A%2F%2Fqrios.me%2F%3A%3A'+str(huntqr[0].id),
                 }
         return dumps(d)
 
