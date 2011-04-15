@@ -1,0 +1,3 @@
+include rattus/config/deployment.ini_tmpl
+recursive-include rattus/public *
+recursive-include rattus/templates *
