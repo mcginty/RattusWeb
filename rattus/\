@@ -46,6 +46,27 @@ class HuntsController(BaseController):
     def new(self, format='html'):
         """GET /hunts/new: Form to create a new item"""
         # url('new_hunt')
+        return render('/api/hunts/new.html')
+
+    def join(self):
+        if 'hunt' in request.params and 'user' in request.params:
+            userhunt = UserHunt(request.params['hunt'], request.params['user'])
+            Session.add(userhunt)
+            Session.commit()
+            d = {
+                    'status': 'ok',
+                    'message': 'User %s successfully joined hunt "%s".' % (request.params['user'], request.params['hunt'])
+                }
+        else:
+            d = {
+                    'status': 'failure',
+                    'message': 'User and Hunt not posted.'
+                }
+        return dumps(d)
+
+    def join_hunt(self, format='html'):
+        """GET /hunts/html: Form to have a user join a hunt"""
+        return render('/api/hunts/join.html')
 
     def update(self, id):
         """PUT /hunts/id: Update an existing item"""

@@ -11,18 +11,18 @@ class HuntQR(Base):
     id = Column(Integer, primary_key=True)
     hunt_id = Column(Integer, ForeignKey('hunt.id'))
     qr_id = Column(Integer, ForeignKey('qr.id'))
-    color = Column(String(16))
+    image = Column(Text())
     name = Column(Text())
     description = Column(Text())
     secret = Column(Text())
     location = Column(Text())
     order = Column(Integer)
 
-    def __init__(self, hunt_id, qr_id, name, color="FF0000", description='', secret='', location='', order=0):
+    def __init__(self, hunt_id, qr_id, name, image='', description='', secret='', location='', order=0):
         self.hunt_id = hunt_id
         self.qr_id = qr_id
         self.name = name
-        self.color = color
+        self.image = image
         self.description = description
         self.secret = secret
         self.location = location

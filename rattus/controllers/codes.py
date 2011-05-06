@@ -40,7 +40,7 @@ class CodesController(BaseController):
                 int(request.params['hunt']), 
                 newqr.id, 
                 request.params['name'], 
-                request.params['color'], 
+                request.params['image'], 
                 request.params['description'], 
                 request.params['secret'], 
                 request.params['location'], 
